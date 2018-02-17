@@ -1,0 +1,6 @@
+/Users/Alex/RiderProjects/TRPO/DateRegExp/bin/Debug/DateRegExp.exe
+/Users/Alex/RiderProjects/TRPO/DateRegExp/bin/Debug/DateRegExp.pdb
+/Users/Alex/RiderProjects/TRPO/DateRegExp/obj/Debug/DateRegExp.csprojResolveAssemblyReference.cache
+/Users/Alex/RiderProjects/TRPO/DateRegExp/obj/Debug/DateRegExp.csproj.CoreCompileInputs.cache
+/Users/Alex/RiderProjects/TRPO/DateRegExp/obj/Debug/DateRegExp.exe
+/Users/Alex/RiderProjects/TRPO/DateRegExp/obj/Debug/DateRegExp.pdb

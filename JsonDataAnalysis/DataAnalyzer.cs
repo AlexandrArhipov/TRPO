@@ -44,25 +44,37 @@ namespace JsonDataAnalysis
             }
         }
 
-        public void PrintStats(string columnName)
-        {
+        public Dictionary<string, object> GetStats(string columnName)
+        {            
             string columnNameQc = columnName + "_qc";
             
             if (!_dataTable.Columns.Contains(columnName) || !_dataTable.Columns.Contains(columnNameQc))
                 throw new ArgumentException("Column " + columnName + " isn't represented in DataTable");
 
-            var validRows = _dataTable.AsEnumerable().Where(row => row.Field<byte>(columnNameQc) == 0);
+            int indexOfFirstValidRecord = 0;
 
-            List<DataRow> minValueRows = new List<DataRow> { validRows.First() };
-            List<DataRow> maxValueRows = new List<DataRow> { validRows.First() };
+            foreach (DataRow row in _dataTable.Rows)
+            {
+                if (row.Field<byte>(columnNameQc) == 0)
+                    break;
+
+                indexOfFirstValidRecord++;
+            }
+            
+            List<DataRow> minValueRows = new List<DataRow> { _dataTable.Rows[indexOfFirstValidRecord] };
+            List<DataRow> maxValueRows = new List<DataRow> { _dataTable.Rows[indexOfFirstValidRecord] };
 
             float minValue = minValueRows[0].Field<float>(columnName);
             float maxValue = maxValueRows[0].Field<float>(columnName);
 
             float sum = 0;
+            int validRowsCount = 0;
 
-            foreach (DataRow row in validRows.Skip(1))
+            foreach (DataRow row in _dataTable.AsEnumerable().Skip(indexOfFirstValidRecord))
             {
+                if (row.Field<byte>(columnNameQc) != 0)
+                    continue;
+                
                 float currentValue = row.Field<float>(columnName);
 
                 if (currentValue < minValue)
@@ -82,17 +94,24 @@ namespace JsonDataAnalysis
                     maxValueRows.Add(row);
                 
                 sum += currentValue;
+                validRowsCount++;
             }
 
-            var avgValue = sum / validRows.Count();
+            var avgValue = sum / validRowsCount;
 
-            Console.WriteLine(columnName + ":");
-            foreach (var row in minValueRows)
-                Console.WriteLine("Min " + columnName + ": " + row[columnName] + " at " + row["time"]);
-            foreach (var row in maxValueRows)
-                Console.WriteLine("Max " + columnName + ": " + row[columnName] + " at " + row["time"]);            
-            Console.WriteLine("Avg " + columnName + ": " + avgValue);
+            Dictionary<string, object> result = new Dictionary<string, object>(8)
+            {
+                {"start_date", DateTime.Parse(_dataTable.Rows[0].Field<string>("time")).ToShortDateString()},
+                {"end_date", DateTime.Parse(_dataTable.Rows[_dataTable.Rows.Count - 1].Field<string>("time")).ToShortDateString()},
+                {"num_records", validRowsCount},
+                {"min_" + columnName, minValueRows[0][columnName]},
+                {"min_times", minValueRows.Select(row => row["time"])},
+                {"max_" + columnName, maxValueRows[0][columnName]},
+                {"max_times", maxValueRows.Select(row => row["time"])},
+                {"avg_" + columnName, avgValue}
+            };
 
+            return result;
         }
     }
 }

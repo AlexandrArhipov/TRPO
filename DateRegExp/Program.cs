@@ -44,7 +44,7 @@ namespace DateRegExp
                                   ? "date and time."
                                   : "not date and time."));
             
-            const string correctEmail = "arhip.sasha.26@yandex.ru";
+            const string correctEmail = "архип.sasha.26@яндекс.рф";
             const string incorrectEmail = ".arhip.sasha.26@yandex.ru";
             
             Console.WriteLine(correctEmail + " is " + (RegExChecker.CheckForEmail(correctEmail) ? "email." : "not email."));

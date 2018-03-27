@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateRegExp", "DateRegExp\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonDataAnalysis", "JsonDataAnalysis\JsonDataAnalysis.csproj", "{9257BA67-7D24-4489-A991-E2B09B1676D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestService", "RestService\RestService.csproj", "{70B5E875-3335-42FB-8D97-02C8BDD5D7E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{9257BA67-7D24-4489-A991-E2B09B1676D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9257BA67-7D24-4489-A991-E2B09B1676D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9257BA67-7D24-4489-A991-E2B09B1676D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B5E875-3335-42FB-8D97-02C8BDD5D7E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B5E875-3335-42FB-8D97-02C8BDD5D7E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B5E875-3335-42FB-8D97-02C8BDD5D7E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B5E875-3335-42FB-8D97-02C8BDD5D7E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
